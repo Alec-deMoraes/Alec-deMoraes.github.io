@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Alec de Moraes' Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { font-family: 'Poppins', sans-serif; }
+    html { scroll-behavior: smooth; }
+
+    /* Sticky nav with blur */
+    .nav-sticky {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      
+      background-image: url(abstracttexture.jpg);
+      background-size: 2500px 2500px; 
+      background-repeat: repeat;
+      background-position: center 0;        
+
+      animation: nav-flicker 180s linear infinite;
+    }
+
+    @keyframes nav-flicker {
+      from {
+      background-position: center 0;
+      }
+      to {
+        background-position: center -2500px;
+      }
+    }
+
+    .arrowbtn:hover {
+      animation: arrowshake 2s ease-in-out infinite;
+    }
+
+    @keyframes arrowshake {
+      0% {
+        transform: rotate(0deg);
+      }
+      25% {
+        transform: rotate(-30deg);
+      }
+      50% {
+        transform: rotate(30deg);
+      }
+      75% {
+        transform: rotate(-30deg);
+      }
+      100% {
+        transform: rotate(0deg);
+      }
+    }
+
+    .projarrow:hover {
+      animation : projarrowshake 2s ease-in-out infinite;
+    }
+
+    @keyframes projarrowshake {
+      0% {
+        transform: rotate(0deg);
+      }
+      25% {
+        transform: rotate(-30deg);
+      }
+      50% {
+        transform: rotate(30deg);
+      }
+      75% {
+        transform: rotate(-30deg);
+      }
+      100% {
+        transform: rotate(0deg);
+      }
+    }
+
+    .outershine {
+      box-shadow: rgba(236, 236, 235, 0.6) 0px 0px 15px;
+      border-width: 1px;
+      border-style: solid;
+      border-color: rgb(250, 249, 248);
+      border-radius: 10px
+    }
+    .outershine:hover {
+      box-shadow: 0 16px 40px rgba(233, 235, 240, 0.09);
+    }
+
+    .download {
+      box-shadow: rgba(252, 1, 1, 0.6) 0px 0px 15px;
+      border-width: 1px;
+      border-style: solid;
+      border-color: rgb(197, 5, 5);
+      border-radius: 10px
+    }
+    .download:hover {
+      box-shadow: rgba(252, 1, 1, 0.8) 0px 0px 25px;
+    }
+
+    .flickering {
+      color: rgb(220, 220, 220);
+      animation: 4s linear 0s infinite normal none running text-flicker;
+
+    }
+
+    @keyframes text-flicker {
+      0% {
+          opacity: 1;
+          text-shadow: rgba(255, 255, 255, 0.6) 0px 0px 4px;
+      }
+      5% {
+          opacity: 0.8;
+          text-shadow: rgba(255, 255, 255, 0.2) 0px 0px 2px;
+      }
+      10% {
+          opacity: 1;
+          text-shadow: rgba(255, 255, 255, 0.6) 0px 0px 4px;
+      }
+
+      15% {
+          opacity: 1;
+          text-shadow: rgba(255, 255, 255, 0.6) 0px 0px 4px;
+      }
+      20% {
+          opacity: 0.5;
+          text-shadow: rgba(255, 255, 255, 0) 0px 0px 0px;
+      }
+      22% {
+          opacity: 1;
+          text-shadow: rgba(255, 255, 255, 0.8) 0px 0px 6px;
+      }
+      100% {
+          opacity: 1;
+          text-shadow: rgba(255, 255, 255, 0.6) 0px 0px 4px;
+      }
+    }
+
+    .stripes {
+      background-color: #000;
+      background-image: repeating-linear-gradient(45deg, #000, #000 10px, #0a0a0a 10px, #0a0a0a 20px);
+      background-size: 200% 200%;
+    }
+
+    /* Skill / tag chips */
+    .chip {
+      display: inline-block;
+      background: #000000;
+      color: #F5F5F4;
+      border: 1px solid #F5F5F4;
+      padding: 0.2rem 0.65rem;
+      border-radius: 0.25rem;
+      font-size: 0.72rem;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .chip-gray {
+      background:
+      linear-gradient(rgba(128, 128, 128, 0.726), rgba(128, 128, 128, 0.726)) padding-box,
+      linear-gradient(135deg,
+        #2a0505 0%,
+        #4A0000 25%,
+        #660000 50%,
+        #8B0000 75%,
+        #4A0000 100%
+      ) border-box;
+
+      color: #F5F5F4;
+
+      border: 2px solid transparent;
+      border-radius: 0.25rem;
+    }
+
+    /* Project cards */
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .project-tags {
+      margin-top: auto;
+      padding-top: 1rem;
+    }
+
+    /* Scroll fades */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Section title bars */
+    .section-title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      font-size: 2.5rem;
+      text-align: center;
+    }
+
+    .section-title::before,
+    .section-title::after {
+      content: '';
+      width: 80px;
+      height: 2px;
+      background: #7F1D1D;
+      border-radius: 0;
+    }
+
+
+    .header-gradient {
+      background: radial-gradient(ellipse 700px 250px at 5% 40%, #e0e0e0 0%, transparent 60%),
+                  radial-gradient(ellipse 600px 280px at 80% 25%, #969696 0%, transparent 65%),
+                  radial-gradient(ellipse 650px 240px at 45% 75%, #585858 0%, transparent 60%),
+                  radial-gradient(ellipse 550px 220px at 90% 65%, #e0e0e0 0%, transparent 55%),
+                  radial-gradient(ellipse 580px 200px at 30% 15%, #969696 0%, transparent 60%),
+                  radial-gradient(ellipse 500px 190px at 70% 45%, #585858 0%, transparent 55%),
+                  #0a0a0a;
+      color: #F5F5F4;
+    }
+
+    /* Mobile nav toggle */
+    .contact-btn {
+      background: rgba(14, 14, 14, 0.418);
+      border: 2px solid white;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    }
+    .contact-btn span {
+      display: inline-block;
+    }
+    .contact-btn:hover {
+      background: rgba(128, 128, 128, 0.726);
+    }
+    .contact-btn:hover span {
+      animation: 0.2s linear textrotate;
+      animation-fill-mode: forwards;
+    }
+
+    @keyframes textrotate {
+      from {
+        transform: rotate(0deg) scale(1);
+      }
+      to {
+        transform: rotate(-10deg) scale(1.3);
+      }
+    }
+
+    /* Contact gradient with dark red hues */
+    .contact-gradient {
+      background: linear-gradient(135deg, #2a0505 0%, #4A0000 25%, #660000 50%, #8B0000 75%, #4A0000 100%);
+    }
+
+    /* Mobile nav toggle */
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .nav-links.open { display: flex; flex-direction: column; gap: 0.5rem; padding: 1rem; border-top: 1px solid #e5e7eb; background: white; }
+    }
+  </style>
+</head>
+<body class="bg-[#1C1917] text-gray-900 antialiased">
+
+  <!-- ── NAVIGATION ── -->
+  <nav class="nav-sticky">
+    <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="#" class="text-xl font-bold tracking-tight text-[#F5F5F4] flex-shrink-0">
+        <span class="hover:text-[#fbd9d3] transition-colors flickering">Alec de Moraes</span>
+      </a>
+      <div class="hidden sm:flex items-center gap-7 text-sm font-medium text-white/90 flex-1 justify-center">
+        <a href="#education_and_activities"   class="hover:text-[#fbd9d3] transition-colors">Education &amp; Activities</a>
+        <a href="#experience"   class="hover:text-[#fbd9d3] transition-colors">Work Experience</a>
+        <a href="#projects"     class="hover:text-[#fbd9d3] transition-colors">Projects</a>
+        <a href="#labs"         class="hover:text-[#fbd9d3] transition-colors">Labs</a>
+        <a href="#skills"       class="hover:text-[#fbd9d3] transition-colors">Skills</a>
+      </div>
+      <div class="hidden sm:flex flex-shrink-0">
+        <a href="#contact" class="contact-btn"><span>Contact</span></a>
+      </div>
+      <!-- Mobile menu button -->
+      <button onclick="document.getElementById('mobileMenu').classList.toggle('hidden')"
+        class="sm:hidden text-white/90 hover:text-[#fbd9d3] focus:outline-none" aria-label="Toggle menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="hidden sm:hidden px-6 pb-4 flex flex-col gap-3 text-sm font-medium text-white/90 border-t border-white/10 pt-4">
+      <a href="#education_and_activities"   class="hover:text-[#fbd9d3] transition-colors">Education &amp; Activities</a>
+      <a href="#experience"  class="hover:text-[#fbd9d3] transition-colors">Work Experience</a>
+      <a href="#projects"    class="hover:text-[#fbd9d3] transition-colors">Projects</a>
+      <a href="#labs"        class="hover:text-[#fbd9d3] transition-colors">Labs</a>
+      <a href="#skills"      class="hover:text-[#fbd9d3] transition-colors">Skills</a>
+      <a href="#contact"     class="text-[#fbd9d3] font-semibold">Contact</a>
+    </div>
+  </nav>
+
+
+  <!-- ── Intro ── -->
+  <section class="pt-10 pb-20 stripes mx-auto px-6">
+    <div class="flex flex-col items-center text-center gap-8">
+      <!-- Profile photo -->
+      <div>
+        <img src="profile.jpeg" alt="Alec de Moraes"
+          class="w-48 h-48 rounded-full object-cover border-4 border-[#1C1917] shadow-lg mx-auto"/>
+      </div>
+      <!-- Text -->
+      <div>
+        <p class="text-base text-[#F5F5F4] mb-5 max-w-xl leading-relaxed mx-auto">
+          Hello, I'm Alec, a Computer Engineering student at the University of Michigan - Ann Arbor, with a focus on hardware design and embedded systems.
+        </p>
+        <div class="flex flex-wrap gap-2 justify-center">
+          <span class="chip chip-gray">GPA: 3.2</span>
+          <span class="chip chip-gray">Expected Graduation: May 2027</span>
+        </div>
+        <div class="flex flex-wrap gap-2 justify-center mt-4">
+          <a href="mailto:demoraes@umich.edu" target="_blank"
+            class="chip hover:bg-[#7f7f7f] transition-colors">Email</a>
+          <a href="https://www.linkedin.com/in/alec-de-moraes/" target="_blank"
+            class="chip hover:bg-[#7f7f7f] transition-colors">LinkedIn</a>
+          <a href="https://github.com/Alec-deMoraes" target="_blank"
+            class="chip hover:bg-[#7f7f7f] transition-colors">Github</a>
+          <a href="Resume.pdf" target="_blank"
+            class="chip hover:bg-[#7f7f7f] transition-colors">Resume</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── EDUCATION + ACTIVITIES ── -->
+  <section id="education_and_activities" class="py-16 max-w-5xl mx-auto px-6">
+    <div class="grid md:grid-cols-2 gap-12">
+
+      <!-- Education -->
+      <div class="fade-up">
+        <h2 class="text-2xl font-bold text-[#F5F5F4] mb-6 section-title">Education</h2>
+        <div class="rounded-xl p-6 border-2 border-white outershine stripes">
+          <div class="flex items-start justify-between mb-1">
+            <h2 class="font-semibold text-[#F5F5F4] text-lg">University of Michigan - Ann Arbor</h2>
+            <span class="text-xs text-[#D3D3D3] font-medium, mt-2">2023 – 2027</span>
+          </div>
+          <p class="text-xs text-[#D3D3D3] font-medium mb-6">(BS) Computer Engineering, 3.2 GPA</p>
+          <p class="text-xs font-semibold uppercase tracking-widest text-[#F5F5F4] mb-3">Coursework:</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="chip">Electronic Circuits</span>
+            <span class="chip">Signals and Systems</span>
+            <span class="chip">Logic Design</span>
+            <span class="chip">Data Structures and Algorithms</span>
+            <span class="chip">Computer Organization</span>
+            <span class="chip">Digital Integrated Circuits</span>
+            <span class="chip">Embedded Control Systems</span>
+            <span class="chip">VLSI Design I</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Activities -->
+      <div class="fade-up">
+        <h2 class="text-2xl font-bold text-[#F5F5F4] mb-6 section-title">Activities</h2>
+        <div class="rounded-xl p-6 border-2 border-white outershine stripes">
+
+          <!-- MDST -->
+          <div class="flex items-start justify-between mb-1">
+            <h2 class="font-semibold text-[#FFFFFF] text-lg mb-3">MDST</h2>
+            <span class="text-xs text-[#D3D3D3] font-medium, mt-2">2023 – 2024</span>
+          </div>
+          <div class="flex flex-wrap gap-2 mb-5">
+            <ul class="text-sm text-[#F5F5F4] space-y-1 leading-relaxed list-disc list-inside">
+              <li>Did Something, Filler Text.</li>
+              <li>List Item #2.</li>
+            </ul>
+          </div>
+
+          <!-- M-STARX -->
+          <div class="flex items-start justify-between mb-1">
+            <h2 class="font-semibold text-[#FFFFFF] text-lg mb-3">M-STARX</h2>
+            <span class="text-xs text-[#D3D3D3] font-medium, mt-2">2025 – Present</span>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <ul class="text-sm text-[#F5F5F4] space-y-1 leading-relaxed list-disc list-inside">
+              <li>Designed custom wiring, a wearable LED sign subsystem, and tested/wired electrical components for an
+                  exoskeleton aimed at assisting first responders and competing against other exoskeletons in competition.</li>
+              <li>Co-authored and presented a Critical Design Review to professors and sponsors, communicating the exoskeletons
+                  architecture and integration plan to earn actionable guidance.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ── WORK EXPERIENCE ── -->
+  <section id="experience" class="py-16 bg-black">
+    <div class="max-w-5xl mx-auto px-6">
+      <h2 class="text-2xl font-bold text-[#F5F5F4] mb-10 section-title fade-up">Work Experience</h2>
+
+        <div class="relative fade-up">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-0.5">
+            <h3 class="font-semibold text-[#FFFFFF] text-lg">Hardware Engineer Intern</h3>
+            <span class="text-xs text-[#D3D3D3] font-medium mt-1 sm:mt-0">May 2025 – Aug 2025</span>
+          </div>
+          <p class="text-xs text-[#D3D3D3] font-medium mb-4">Dedicated Freight Handlers - Murrieta, CA</p>
+          <ul class="text-sm text-[#F5F5F4] space-y-1 leading-relaxed list-disc list-inside">
+            <li>Developed bare-metal firmware in C for resource-constrained microcontrollers, implementing 2 low-level drivers (UART,
+                I2C) that enabled end-to-end data collection and transmission of business data on prototype hardware.</li>
+            <li>Created Python test scripts for hardware validation of embedded systems, automating test workflows and reducing manual
+                validation time while enabling scalable RTOS-based firmware solutions.</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section> 
+
+  <!-- ── PROJECTS ── -->
+  <section id="projects" class="py-16 max-w-5xl mx-auto px-6">
+    <h2 class="text-2xl font-bold text-[#F5F5F4] mb-8 section-title fade-up">Projects</h2>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+      <div class="relative sm:col-span-2 lg:col-span-3">
+
+      <button
+        class="lab-toggle absolute z-10 flex-shrink-0 w-16 h-16 border-2 border-white text-white flex items-center justify-center rounded hover:bg-white/25 transition"
+        style="left: -90px; top: calc(50% - 32px);"
+        onclick="toggleProj(this)">
+        <svg class="w-12 h-12" style="transform: rotate(90deg);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7m0 0l-7-7m7"/>
+        </svg>
+      </button>
+
+      <button
+        class="lab-toggle absolute z-10 flex-shrink-0 w-16 h-16 border-2 border-white text-white flex items-center justify-center rounded hover:bg-white/25 transition"
+        style="right: -90px; top: calc(50% - 32px);"
+        onclick="toggleProj(this)">
+        <svg class="w-12 h-12" style="transform: rotate(-90deg);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7m0 0l-7-7m7"/>
+        </svg>
+      </button>
+
+        <!-- Hand Rep w/ Video Demo -->
+        <div class="project-card fade-up rounded-xl border-2 border-white p-6 outershine stripes sm:col-span-2 lg:col-span-3">
+          <h3 class="font-semibold text-[#F5F5F4] mb-4 text-lg">Hand Movement Replication</h3> 
+          <p class="text-sm text-[#F5F5F4] leading-relaxed mb-3">
+            Programmed an ESP32 microcontroller to read in accelerometer data via SPI/I2C and compute real-time finger
+            bend and wrist rotation movements, mapping sensor orientation to motion outputs.
+          </p>
+          <p class="text-sm text-[#F5F5F4] leading-relaxed mb-5">
+            Drove a synchronized robotic hand with servo motors for finger tendon movement and a stepper motor for wrist
+            rotation. Added an ESP32 hosted web-server coded with HTML and JavaScript for visual indication of finger and
+            wrist movement.
+          </p>
+
+          <!-- Demo video -->
+          <div class="grid sm:grid-cols-2 gap-4 mb-5">
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-widest text-[#D3D3D3] mb-2">Video Demonstration:</p>
+              <div class="relative w-full rounded-lg overflow-hidden bg-gray-900" style="padding-top: 56.25%;">
+                <iframe
+                  src="https://www.youtube.com/embed/ZEOoqdE2vmQ"
+                  title="Hand Replication Project Demo"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                  class="absolute inset-0 w-full h-full">
+                </iframe>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-tags flex flex-wrap gap-1.5">
+            <span class="chip">ESP32 Microcontroller</span>
+            <span class="chip">Arduino IDE</span>
+            <span class="chip">HTML</span>
+            <span class="chip">Javascript</span>
+            <span class="chip">Hardware</span>
+          </div>
+        </div>
+
+      </div>  
+
+      <!-- Sequential Calculator -->
+      <div class="project-card fade-up rounded-xl border-2 border-white p-6 outershine stripes">
+        <h3 class="font-semibold text-[#F5F5F4] mb-4 text-lg">Sequential Calculator</h3>
+        <p class="text-sm text-[#F5F5F4] leading-relaxed mb-3">
+           Designed and implemented a four-function calculator in Verilog using RTL design principles, with a custom
+           datapath/controller, overflow detection, and signed-magnitude/two’s complement handling.
+        </p>
+        <p class="text-sm text-[#F5F5F4] leading-relaxed mb-4">
+           Verified functionality through ModelSim simulation and hardware testing on an FPGA board.
+        </p>
+        <div class="project-tags flex flex-wrap gap-1.5">
+          <span class="chip">Verilog</span>
+        </div>
+      </div>
+
+      <!-- Traffic Light Controller -->
+      <div class="project-card fade-up rounded-xl border-2 border-white p-6 outershine stripes">
+        <h3 class="font-semibold text-[#F5F5F4] mb-4 text-lg">Traffic Light Controller</h3>
+        <p class="text-sm text-[#F5F5F4] leading-relaxed mb-3">
+          Created a synchronous finite state machine traffic light controller for a 3-way intersection using sensor inputs to
+          coordinate traffic flow.
+        </p>
+        <p class="text-sm text-[#F5F5F4] leading-relaxed mb-4">
+          Implemented 7-segment display logic to show the remaining time and light color for each lane and verified behavior
+          via test-bench and simulation.
+        </p>
+        <div class="project-tags flex flex-wrap gap-1.5">
+          <span class="chip">Verilog</span>
+        </div>
+      </div>
+
+      <!-- Stock Market Simulation -->
+      <div class="project-card fade-up rounded-xl border-2 border-white p-6 outershine stripes">
+        <h3 class="font-semibold text-[#F5F5F4] mb-4 text-lg">Stock Market Simulation</h3>
+        <p class="text-sm text-[#F5F5F4] leading-relaxed mb-3">
+          Developed an event-driven stock market simulation in C++ leveraging STL priority_queues to monitor pricing statistics,
+          track trader activity, and analyze optimal buy/sell strategies.
+        </p>
+        <div class="project-tags flex flex-wrap gap-1.5">
+          <span class="chip">C++</span>
+        </div>
+      </div>
+
+      <!-- VirtuWear -->
+      <div class="project-card fade-up rounded-xl border-2 border-white p-6 outershine stripes">
+        <h3 class="font-semibold text-[#F5F5F4] mb-4 text-lg">VirtuWear</h3>
+        <p class="text-sm text-[#F5F5F4] leading-relaxed mb-3">
+          Built the front end in HTML/CSS for a web app that stores user wardrobe photos and generates outfit recommendatiosn
+          based on input criteria.
+        </p>
+        <p class="text-sm text-[#F5F5F4] leading-relaxed mb-4">
+          Collaborated with a four-person team to develop and pitch the site at MHacks 16, a 24-hour hackathon.
+        </p>
+        <div class="project-tags flex flex-wrap gap-1.5">
+          <span class="chip">Python</span>
+          <span class="chip">Javascript</span>
+          <span class="chip">Flask</span>
+          <span class="chip">SQL</span>
+          <span class="chip">HTML</span>
+          <span class="chip">CSS</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── LABS ── -->
+  <section id="labs" class="py-16 bg-black">
+    <div class="max-w-5xl mx-auto px-6">
+      <!-- Title above -->
+      <h2 class="text-2xl font-bold text-[#F5F5F4] mb-12 section-title">Lab Documentation</h2>
+      
+      <!-- Description and download -->
+      <div class="mb-12">
+        <p class="text-sm text-[#F5F5F4] leading-relaxed mb-6 max-w-2xl mx-auto text-center">
+          The following zip file contains all of my lab work from <strong class="text-[#FFFFFF]">EECS 215 (Electronic Circuits), EECS 216 (Signals and Systems), and EECS 312 (Digital Integrated Circuits)</strong>  
+          at the University of Michigan - Ann Arbor, including pre-lab and post-lab questions and write-ups, and lab work including simulation documents.
+        </p>
+        <div class="flex justify-center">
+          <a href="https://drive.google.com/file/d/1NoGfyjXfggC-d7dyo1nq69usvUxg_N9J/view?usp=sharing" target="_blank"
+            class="download inline-flex items-center gap-2 bg-[#7F1D1D] text-white font-semibold px-5 py-3 hover:bg-[#4a0006] transition-colors text-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V4"/>
+            </svg>
+            Download Lab Documentation (.zip)
+          </a>
+        </div>
+      </div>
+
+      <!-- Lab courses with expandable sections -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+        <!-- EECS 215 -->
+        <div class="lab-course">
+          <div class="flex items-center justify-center gap-4 mb-4">
+            <h3 class="text-lg font-semibold text-[#F5F5F4] whitespace-nowrap">EECS 215 Contents</h3>
+            <button class="arrowbtn lab-toggle flex-shrink-0 w-8 h-8 border-2 border-white text-white flex items-center justify-center rounded hover:bg-white/25 transition" onclick="toggleLab(this)">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7m0 0l-7-7m7 "/>
+              </svg>
+            </button>
+          </div>
+          <div class="lab-content hidden space-y-2 mx-auto w-fit">
+            <div class="text-sm text-[#FFFFFF] pl-4">Lab 1 - R-2R Ladder Analysis</div>
+            <div class="text-sm text-[#FFFFFF] pl-4">Lab 2 - Nodal Analysis</div>
+            <div class="text-sm text-[#FFFFFF] pl-4">Lab 3 - Superposition &amp; Thevenin Eq</div>
+            <div class="text-sm text-[#FFFFFF] pl-4">Lab 4 - MOSFET Analysis</div>
+            <div class="text-sm text-[#FFFFFF] pl-4">Lab 5 - Op-Amp Analysis</div>
+            <div class="text-sm text-[#FFFFFF] pl-4">Lab 6 - First &amp; Second-Order Circuits</div>
+          </div>
+        </div>
+
+        <div class="lab-course">
+          <div class="flex items-center justify-center gap-4 mb-4">
+            <h3 class="text-lg font-semibold text-[#F5F5F4] whitespace-nowrap">EECS 216 Contents</h3>
+            <button class="arrowbtn lab-toggle flex-shrink-0 w-8 h-8 border-2 border-white text-white flex items-center justify-center rounded hover:bg-white/25 transition" onclick="toggleLab(this)">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7m0 0l-7-7m7"/>
+              </svg>
+            </button>
+          </div>
+          <div class="lab-content hidden space-y-2 mx-auto w-fit">
+            <div class="text-sm text-[#FFFFFF] pl-4">Lab 1 - LTI Systems</div>
+            <div class="text-sm text-[#FFFFFF] pl-4">Lab 2 - Envelope Detector</div>
+            <div class="text-sm text-[#FFFFFF] pl-4">Lab 3 - Frequency Discriminator</div>
+            <div class="text-sm text-[#FFFFFF] pl-4">Lab 4 - AM Radio</div>
+            <div class="text-sm text-[#FFFFFF] pl-4">Lab 5 - Feedback Control</div>
+          </div>
+        </div>
+
+        <div class="lab-course">
+          <div class="flex items-center justify-center gap-4 mb-4">
+            <h3 class="text-lg font-semibold text-[#F5F5F4] whitespace-nowrap">EECS 312 Contents</h3>
+            <button class="arrowbtn lab-toggle flex-shrink-0 w-8 h-8 border-2 border-white text-white flex items-center justify-center rounded hover:bg-white/25 transition" onclick="toggleLab(this)">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7m0 0l-7-7m7"/>
+              </svg>
+            </button>
+          </div>
+          <div class="lab-content hidden space-y-2 mx-auto w-fit">
+            <div class="text-sm text-[#FFFFFF] pl-4">Final Lab Report - RCA Design</div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </section>
+
+  <!-- ── SKILLS ── -->
+  <section id="skills" class="py-14 bg-[#1C1917]">
+    <div class="max-w-5xl mx-auto px-6 fade-up">
+      <h2 class="text-2xl font-bold text-[#F5F5F4] mb-8 section-title">Technical Skills</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-widest text-[#F5F5F4] mb-3 text-center">Languages</p>
+          <div class="flex flex-wrap gap-2 justify-center">
+            <span class="chip">C/C++</span>
+            <span class="chip">Python</span>
+            <span class="chip">Verilog</span>
+            <span class="chip">ARM</span>
+            <span class="chip">MATLAB</span>
+          </div>
+        </div>
+
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-widest text-[#F5F5F4] mb-3 text-center">Hardware</p>
+          <div class="flex flex-wrap gap-2 justify-center">
+            <span class="chip">Embedded C/C++</span>
+            <span class="chip">Embedded Systems</span>
+            <span class="chip">Microcontrollers</span>
+            <span class="chip">UART</span>
+            <span class="chip">I2C</span>
+            <span class="chip">SPI</span>
+            <span class="chip">RTOS</span>
+            <span class="chip">Firmware Development</span>
+            <span class="chip">Device Drivers</span>
+          </div>
+        </div>
+
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-widest text-[#F5F5F4] mb-3 text-center">Lab Equipment</p>
+          <div class="flex flex-wrap gap-2 justify-center">
+            <span class="chip">Oscilloscopes</span>
+            <span class="chip">Multimeters</span>
+          </div>
+        </div>
+
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-widest text-[#F5F5F4] mb-3 text-center">General</p>
+          <div class="flex flex-wrap gap-2 justify-center">
+            <span class="chip">Cadence Design Systems</span>
+            <span class="chip">PCB Design</span>
+            <span class="chip">Soldering</span>
+            <span class="chip">Electrical Datasheets</span>
+            <span class="chip">ModelSim</span>
+            <span class="chip">Object-Oriented Programming</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ──  CONTACT ── -->
+  <section id="contact" class="py-10 contact-gradient">
+    <div class="max-w-2xl mx-auto px-6 text-center fade-up">
+      <h2 class="text-5xl font-extrabold text-[#F5F5F4] mb-10 tracking-tight">Want to Connect?</h2>
+      <p class="text-[#F5F5F4] mb-10 text-md leading-relaxed">
+        I am open to 2027 job opportunities in computer engineering,<br class="hidden sm:block"> embedded systems, hardware engineering, and related fields.
+      </p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a href="mailto:demoraes@umich.edu"
+          class="text-[#F5F5F4] font-semibold px-5 py-3 contact-btn transition-colors text-sm">
+          <span>Email</span>
+        </a>
+        <a href="https://www.linkedin.com/in/alec-de-moraes" target="_blank"
+          class="text-[#F5F5F4] font-semibold px-5 py-3 contact-btn transition-colors text-sm">
+          <span>LinkedIn</span>
+        </a>
+        <a href="https://github.com/Alec-deMoraes" target="_blank"
+          class="text-[#F5F5F4] font-semibold px-5 py-3 contact-btn transition-colors text-sm">
+          <span>Github</span>
+        </a>
+        <a href="Resume.pdf" target="_blank"
+          class="text-[#F5F5F4] font-semibold px-5 py-3 contact-btn transition-colors text-sm">
+          <span>Resume</span>
+        </a>
+      </div>
+      <p class="text-[#F5F5F4] text-xs mt-10">Murrieta, CA (Open to Relocation) &nbsp;-&nbsp; (951)-200-9400</p>
+    </div>
+  </section>
+
+
+  <!-- ── FOOTER ── -->
+  <footer class="py-5 text-center text-xs text-[#F5F5F4] stripes">
+    © 2026 Alec de Moraes &nbsp;-&nbsp; Website created with HTML and Tailwind CSS
+  </footer>
+
+
+  <!-- Scroll fade-in observer + other scripts -->
+
+  <script>
+    // Toggle lab content visibility
+    function toggleLab(button) {
+      const labCourse = button.closest('.lab-course');
+      const labContent = labCourse.querySelector('.lab-content');
+      labContent.classList.toggle('hidden');
+      button.querySelector('svg').style.transform = labContent.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+    }
+
+    function toggleProj(button) {
+      const labCourse = button.closest('.lab-course');
+      const labContent = labCourse.querySelector('.lab-content');
+      labContent.classList.toggle('hidden');
+      button.querySelector('svg').style.transform = labContent.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Smooth scroll with header offset for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        // Only apply offset scroll for specific sections
+        if (['#education_and_activities', '#experience', '#projects', '#labs'].includes(href)) {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
+            const headerHeight = document.querySelector('.nav-sticky').offsetHeight;
+            const targetPosition = target.offsetTop - headerHeight;
+            window.scrollTo({
+              top: targetPosition,
+              behavior: 'smooth'
+            });
+          }
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
