@@ -66,13 +66,13 @@
         transform: rotate(0deg);
       }
       25% {
-        transform: rotate(-30deg);
+        transform: rotate(-10deg);
       }
       50% {
-        transform: rotate(30deg);
+        transform: rotate(10deg);
       }
       75% {
-        transform: rotate(-30deg);
+        transform: rotate(-10deg);
       }
       100% {
         transform: rotate(0deg);
@@ -184,6 +184,24 @@
     .project-tags {
       margin-top: auto;
       padding-top: 1rem;
+    }
+
+    .video-project {
+
+    }
+    .video-project.project-exit {
+      animation: exiting 1s ease-in-out forwards;
+    }
+
+    @keyframes exiting {
+      from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      to {
+        opacity: 0;
+        transform: translateY(-450px) scale(0) rotate(35deg);
+      }
     }
 
     /* Scroll fades */
@@ -379,8 +397,8 @@
           </div>
           <div class="flex flex-wrap gap-2 mb-5">
             <ul class="text-sm text-[#F5F5F4] space-y-1 leading-relaxed list-disc list-inside">
-              <li>Did Something, Filler Text.</li>
-              <li>List Item #2.</li>
+              <li>Learned statistical models for data analysis in Python, information theory, and machine learning concepts.</li>
+              <li>Applied different algorithms (linear regression, neural networks) to optimize NLP models.</li>
             </ul>
           </div>
 
@@ -434,25 +452,25 @@
       <div class="relative sm:col-span-2 lg:col-span-3">
 
       <button
-        class="lab-toggle absolute z-10 flex-shrink-0 w-16 h-16 border-2 border-white text-white flex items-center justify-center rounded hover:bg-white/25 transition"
+        class="projarrow lab-toggle absolute z-10 flex-shrink-0 w-16 h-16 border-2 border-white text-white flex items-center justify-center rounded hover:bg-white/25 transition"
         style="left: -90px; top: calc(50% - 32px);"
-        onclick="toggleProj(this)">
+        onclick="toggleProj(-1)">
         <svg class="w-12 h-12" style="transform: rotate(90deg);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7m0 0l-7-7m7"/>
         </svg>
       </button>
 
       <button
-        class="lab-toggle absolute z-10 flex-shrink-0 w-16 h-16 border-2 border-white text-white flex items-center justify-center rounded hover:bg-white/25 transition"
+        class="projarrow lab-toggle absolute z-10 flex-shrink-0 w-16 h-16 border-2 border-white text-white flex items-center justify-center rounded hover:bg-white/25 transition"
         style="right: -90px; top: calc(50% - 32px);"
-        onclick="toggleProj(this)">
+        onclick="toggleProj(1)">
         <svg class="w-12 h-12" style="transform: rotate(-90deg);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7m0 0l-7-7m7"/>
         </svg>
       </button>
 
         <!-- Hand Rep w/ Video Demo -->
-        <div class="project-card fade-up rounded-xl border-2 border-white p-6 outershine stripes sm:col-span-2 lg:col-span-3">
+        <div class="video-project project-card fade-up rounded-xl border-2 border-white p-6 outershine stripes sm:col-span-2 lg:col-span-3">
           <h3 class="font-semibold text-[#F5F5F4] mb-4 text-lg">Hand Movement Replication</h3> 
           <p class="text-sm text-[#F5F5F4] leading-relaxed mb-3">
             Programmed an ESP32 microcontroller to read in accelerometer data via SPI/I2C and compute real-time finger
@@ -488,8 +506,43 @@
             <span class="chip">Hardware</span>
           </div>
         </div>
+      
+      <!-- Inverse Pendulum w/ Video Demo (Hidden) -->
+        <div class="video-project hidden project-card fade-up rounded-xl border-2 border-white p-6 outershine stripes sm:col-span-2 lg:col-span-3">
+          <h3 class="font-semibold text-[#F5F5F4] mb-4 text-lg">Inverse Pendulum</h3> 
+          <p class="text-sm text-[#F5F5F4] leading-relaxed mb-3">
+            Filler Description #1 - something about assembling and hardware for making the inverse pendulum.
+          </p>
+          <p class="text-sm text-[#F5F5F4] leading-relaxed mb-5">
+            Filler Description #2 - something about interfacing the angle for visual UI.
+          </p>
 
-      </div>  
+          <!-- Demo video -->
+          <div class="grid sm:grid-cols-2 gap-4 mb-5">
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-widest text-[#D3D3D3] mb-2">Video Demonstration:</p>
+              <div class="relative w-full rounded-lg overflow-hidden bg-gray-900" style="padding-top: 56.25%;">
+                <iframe
+                  src="https://www.youtube.com/embed/????"
+                  title="Inverse Pendulum Project Demo"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                  class="absolute inset-0 w-full h-full">
+                </iframe>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-tags flex flex-wrap gap-1.5">
+            <span class="chip">ESP32 Microcontroller</span>
+            <span class="chip">Hardware</span>
+            <span class="chip">Arduino IDE</span>
+            <span class="chip">Python</span>
+            <span class="chip">HTML</span>
+          </div>
+
+        </div>
+      </div>
 
       <!-- Sequential Calculator -->
       <div class="project-card fade-up rounded-xl border-2 border-white p-6 outershine stripes">
@@ -538,7 +591,7 @@
       <div class="project-card fade-up rounded-xl border-2 border-white p-6 outershine stripes">
         <h3 class="font-semibold text-[#F5F5F4] mb-4 text-lg">VirtuWear</h3>
         <p class="text-sm text-[#F5F5F4] leading-relaxed mb-3">
-          Built the front end in HTML/CSS for a web app that stores user wardrobe photos and generates outfit recommendatiosn
+          Built the front end in HTML/CSS for a web app that stores user wardrobe photos and generates outfit recommendations
           based on input criteria.
         </p>
         <p class="text-sm text-[#F5F5F4] leading-relaxed mb-4">
@@ -548,9 +601,27 @@
           <span class="chip">Python</span>
           <span class="chip">Javascript</span>
           <span class="chip">Flask</span>
-          <span class="chip">SQL</span>
+          <span class="chip">SQLite</span>
           <span class="chip">HTML</span>
           <span class="chip">CSS</span>
+        </div>
+      </div>
+
+      <!-- Wordle Solver Bot -->
+      <div class="project-card fade-up rounded-xl border-2 border-white p-6 outershine stripes">
+        <h3 class="font-semibold text-[#F5F5F4] mb-4 text-lg">Wordle Solver Bot</h3>
+        <p class="text-sm text-[#F5F5F4] leading-relaxed mb-3">
+          Developed a machine learning algorithm for a Wordle-solving program leveraging Python, achieving a 100% win
+          rate out of 1000 games, with an average guess rate of 3.194/6 attempts.
+        </p>
+        <p class="text-sm text-[#F5F5F4] leading-relaxed mb-4">
+          Implemented and optimized other algorithms including letter frequency analysis, tf-idf vector spaces, and entropy
+          to improve information gain and solver accuracy, with each achieving over a 90% win rate.
+        </p>
+        <div class="project-tags flex flex-wrap gap-1.5">
+          <span class="chip">Python</span>
+          <span class="chip">Flask</span>
+          <span class="chip">SQLite</span>
         </div>
       </div>
 
@@ -741,11 +812,37 @@
       button.querySelector('svg').style.transform = labContent.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
     }
 
-    function toggleProj(button) {
-      const labCourse = button.closest('.lab-course');
-      const labContent = labCourse.querySelector('.lab-content');
-      labContent.classList.toggle('hidden');
-      button.querySelector('svg').style.transform = labContent.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+    // Toggle video project visibility
+    let currentProject = 0;
+    let pendingProject = 0;
+    let projectTimer;
+
+    function toggleProj(direction) {
+      const projects = document.querySelectorAll('.video-project');
+      const outgoingProject = projects[currentProject];
+
+      pendingProject =
+        (pendingProject + direction + projects.length) % projects.length;
+
+      outgoingProject.classList.remove('project-exit');
+      void outgoingProject.offsetWidth;
+      outgoingProject.classList.add('project-exit');
+
+      clearTimeout(projectTimer);
+
+      projectTimer = setTimeout(() => {
+
+        outgoingProject.classList.add('hidden');
+        outgoingProject.classList.remove('project-exit');
+
+        currentProject = pendingProject;
+
+        projects[currentProject].classList.remove('hidden');
+
+        // Make sure scroll fade doesn't leave it transparent
+        projects[currentProject].classList.add('visible');
+
+      }, 700);
     }
 
     const observer = new IntersectionObserver((entries) => {
