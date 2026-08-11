@@ -104,7 +104,6 @@
     .flickering {
       color: rgb(220, 220, 220);
       animation: 4s linear 0s infinite normal none running text-flicker;
-
     }
 
     @keyframes text-flicker {
@@ -139,10 +138,45 @@
       }
     }
 
+    .pulsing {
+      color: rgb(220, 220, 220);
+      animation: 4s linear 0s infinite normal none running text-pulse;
+    }
+
+    @keyframes text-pulse {
+       0% {
+        opacity: 0.5;
+        text-shadow:
+          0 0 2px rgba(255, 255, 255, 0.35),
+          0 0 4px rgba(255, 255, 255, 0.25);
+      }
+      50% {
+        opacity: 0.7;
+        text-shadow:
+          0 0 4px rgba(255, 255, 255, 0.9),
+          0 0 10px rgba(255, 255, 255, 0.7),
+          0 0 18px rgba(255, 255, 255, 0.45),
+          0 0 28px rgba(255, 255, 255, 0.25);
+      }
+      100% {
+        opacity: 0.5;
+        text-shadow:
+          0 0 2px rgba(255, 255, 255, 0.35),
+          0 0 4px rgba(255, 255, 255, 0.25);
+      }
+    }
+
+
     .stripes {
       background-color: #000;
       background-image: repeating-linear-gradient(45deg, #000, #000 10px, #0a0a0a 10px, #0a0a0a 20px);
       background-size: 200% 200%;
+    }
+
+    @property --gradient-angle {
+      syntax: "<angle>";
+      initial-value: 0deg;
+      inherits: false;
     }
 
     /* Skill / tag chips */
@@ -159,19 +193,37 @@
     }
     .chip-gray {
       background:
-      linear-gradient(rgba(128, 128, 128, 0.726), rgba(128, 128, 128, 0.726)) padding-box,
-      linear-gradient(135deg,
-        #2a0505 0%,
-        #4A0000 25%,
-        #660000 50%,
-        #8B0000 75%,
-        #4A0000 100%
-      ) border-box;
+        linear-gradient(rgba(128, 128, 128, 0.726), rgba(128, 128, 128, 0.726)) padding-box,
+        linear-gradient(var(--gradient-angle),
+          #2a0505 0%,
+          #4A0000 25%,
+          #660000 50%,
+          #8B0000 75%,
+          #4A0000 100%
+        ) border-box;
 
       color: #F5F5F4;
 
       border: 2px solid transparent;
       border-radius: 0.25rem;
+
+      animation: gradrotate 15s linear infinite;
+    }
+
+    @keyframes gradrotate {
+      from {
+        --gradient-angle: 0deg;
+        }
+      to {
+        --gradient-angle: 360deg;
+      }
+    }
+
+    .chip-large {
+      padding: 0.4rem 1rem;
+      font-size: 1rem;
+      border-width: 2px;
+      border-radius: 0.5rem;
     }
 
     /* Project cards */
@@ -234,18 +286,6 @@
       border-radius: 0;
     }
 
-
-    .header-gradient {
-      background: radial-gradient(ellipse 700px 250px at 5% 40%, #e0e0e0 0%, transparent 60%),
-                  radial-gradient(ellipse 600px 280px at 80% 25%, #969696 0%, transparent 65%),
-                  radial-gradient(ellipse 650px 240px at 45% 75%, #585858 0%, transparent 60%),
-                  radial-gradient(ellipse 550px 220px at 90% 65%, #e0e0e0 0%, transparent 55%),
-                  radial-gradient(ellipse 580px 200px at 30% 15%, #969696 0%, transparent 60%),
-                  radial-gradient(ellipse 500px 190px at 70% 45%, #585858 0%, transparent 55%),
-                  #0a0a0a;
-      color: #F5F5F4;
-    }
-
     /* Mobile nav toggle */
     .contact-btn {
       background: rgba(14, 14, 14, 0.418);
@@ -294,7 +334,7 @@
   <!-- ── NAVIGATION ── -->
   <nav class="nav-sticky">
     <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
-      <a href="#" class="text-xl font-bold tracking-tight text-[#F5F5F4] flex-shrink-0">
+      <a href="#" class="text-2xl font-bold tracking-tight text-[#F5F5F4] flex-shrink-0">
         <span class="hover:text-[#fbd9d3] transition-colors flickering">Alec de Moraes</span>
       </a>
       <div class="hidden sm:flex items-center gap-7 text-sm font-medium text-white/90 flex-1 justify-center">
@@ -337,22 +377,22 @@
       </div>
       <!-- Text -->
       <div>
-        <p class="text-base text-[#F5F5F4] mb-5 max-w-xl leading-relaxed mx-auto">
+        <p class="text-lg text-[#F5F5F4] mb-5 max-w-xl leading-relaxed mx-auto">
           Hello, I'm Alec, a Computer Engineering student at the University of Michigan - Ann Arbor, with a focus on hardware design and embedded systems.
         </p>
         <div class="flex flex-wrap gap-2 justify-center">
-          <span class="chip chip-gray">GPA: 3.2</span>
-          <span class="chip chip-gray">Expected Graduation: May 2027</span>
+          <span class="chip chip-gray chip-large">GPA: 3.2</span>
+          <span class="chip chip-gray chip-large">Expected Graduation: May 2027</span>
         </div>
         <div class="flex flex-wrap gap-2 justify-center mt-4">
           <a href="mailto:demoraes@umich.edu" target="_blank"
-            class="chip hover:bg-[#7f7f7f] transition-colors">Email</a>
+            class="chip chip-large hover:bg-[#7f7f7f] transition-colors">Email</a>
           <a href="https://www.linkedin.com/in/alec-de-moraes/" target="_blank"
-            class="chip hover:bg-[#7f7f7f] transition-colors">LinkedIn</a>
+            class="chip chip-large hover:bg-[#7f7f7f] transition-colors">LinkedIn</a>
           <a href="https://github.com/Alec-deMoraes" target="_blank"
-            class="chip hover:bg-[#7f7f7f] transition-colors">Github</a>
+            class="chip chip-large hover:bg-[#7f7f7f] transition-colors">Github</a>
           <a href="Resume.pdf" target="_blank"
-            class="chip hover:bg-[#7f7f7f] transition-colors">Resume</a>
+            class="chip chip-large hover:bg-[#7f7f7f] transition-colors">Resume</a>
         </div>
       </div>
     </div>
@@ -364,7 +404,7 @@
 
       <!-- Education -->
       <div class="fade-up">
-        <h2 class="text-2xl font-bold text-[#F5F5F4] mb-6 section-title">Education</h2>
+        <h2 class="text-3xl font-bold text-[#F5F5F4] mb-6 section-title">Education</h2>
         <div class="rounded-xl p-6 border-2 border-white outershine stripes">
           <div class="flex items-start justify-between mb-1">
             <h2 class="font-semibold text-[#F5F5F4] text-lg">University of Michigan - Ann Arbor</h2>
@@ -387,7 +427,7 @@
 
       <!-- Activities -->
       <div class="fade-up">
-        <h2 class="text-2xl font-bold text-[#F5F5F4] mb-6 section-title">Activities</h2>
+        <h2 class="text-3xl font-bold text-[#F5F5F4] mb-6 section-title">Activities</h2>
         <div class="rounded-xl p-6 border-2 border-white outershine stripes">
 
           <!-- MDST -->
@@ -424,11 +464,11 @@
   <!-- ── WORK EXPERIENCE ── -->
   <section id="experience" class="py-16 bg-black">
     <div class="max-w-5xl mx-auto px-6">
-      <h2 class="text-2xl font-bold text-[#F5F5F4] mb-10 section-title fade-up">Work Experience</h2>
+      <h2 class="text-3xl font-bold text-[#F5F5F4] mb-10 section-title fade-up">Work Experience</h2>
 
         <div class="relative fade-up">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-0.5">
-            <h3 class="font-semibold text-[#FFFFFF] text-lg">Hardware Engineer Intern</h3>
+            <h3 class="font-semibold text-[#FFFFFF] text-xl pulsing">Hardware Engineer Intern</h3>
             <span class="text-xs text-[#D3D3D3] font-medium mt-1 sm:mt-0">May 2025 – Aug 2025</span>
           </div>
           <p class="text-xs text-[#D3D3D3] font-medium mb-4">Dedicated Freight Handlers - Murrieta, CA</p>
@@ -446,7 +486,7 @@
 
   <!-- ── PROJECTS ── -->
   <section id="projects" class="py-16 max-w-5xl mx-auto px-6">
-    <h2 class="text-2xl font-bold text-[#F5F5F4] mb-8 section-title fade-up">Projects</h2>
+    <h2 class="text-3xl font-bold text-[#F5F5F4] mb-8 section-title fade-up">Projects</h2>
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
 
       <div class="relative sm:col-span-2 lg:col-span-3">
@@ -632,7 +672,7 @@
   <section id="labs" class="py-16 bg-black">
     <div class="max-w-5xl mx-auto px-6">
       <!-- Title above -->
-      <h2 class="text-2xl font-bold text-[#F5F5F4] mb-12 section-title">Lab Documentation</h2>
+      <h2 class="text-3xl font-bold text-[#F5F5F4] mb-12 section-title">Lab Documentation</h2>
       
       <!-- Description and download -->
       <div class="mb-12">
@@ -712,11 +752,11 @@
   <!-- ── SKILLS ── -->
   <section id="skills" class="py-14 bg-[#1C1917]">
     <div class="max-w-5xl mx-auto px-6 fade-up">
-      <h2 class="text-2xl font-bold text-[#F5F5F4] mb-8 section-title">Technical Skills</h2>
+      <h2 class="text-3xl font-bold text-[#F5F5F4] mb-8 section-title">Technical Skills</h2>
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
 
         <div>
-          <p class="text-xs font-semibold uppercase tracking-widest text-[#F5F5F4] mb-3 text-center">Languages</p>
+          <p class="text-lg font-semibold uppercase tracking-widest text-[#F5F5F4] mb-3 text-center pulsing">Languages</p>
           <div class="flex flex-wrap gap-2 justify-center">
             <span class="chip">C/C++</span>
             <span class="chip">Python</span>
@@ -727,7 +767,7 @@
         </div>
 
         <div>
-          <p class="text-xs font-semibold uppercase tracking-widest text-[#F5F5F4] mb-3 text-center">Hardware</p>
+          <p class="text-lg font-semibold uppercase tracking-widest text-[#F5F5F4] mb-3 text-center pulsing">Hardware</p>
           <div class="flex flex-wrap gap-2 justify-center">
             <span class="chip">Embedded C/C++</span>
             <span class="chip">Embedded Systems</span>
@@ -742,7 +782,7 @@
         </div>
 
         <div>
-          <p class="text-xs font-semibold uppercase tracking-widest text-[#F5F5F4] mb-3 text-center">Lab Equipment</p>
+          <p class="text-lg font-semibold uppercase tracking-widest text-[#F5F5F4] mb-3 text-center pulsing">Lab Equipment</p>
           <div class="flex flex-wrap gap-2 justify-center">
             <span class="chip">Oscilloscopes</span>
             <span class="chip">Multimeters</span>
@@ -750,7 +790,7 @@
         </div>
 
         <div>
-          <p class="text-xs font-semibold uppercase tracking-widest text-[#F5F5F4] mb-3 text-center">General</p>
+          <p class="text-lg font-semibold uppercase tracking-widest text-[#F5F5F4] mb-3 text-center pulsing">General</p>
           <div class="flex flex-wrap gap-2 justify-center">
             <span class="chip">Cadence Design Systems</span>
             <span class="chip">PCB Design</span>
