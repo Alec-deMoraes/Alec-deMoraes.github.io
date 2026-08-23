@@ -12,7 +12,7 @@
     * { font-family: 'Poppins', sans-serif; }
     html { scroll-behavior: smooth; }
 
-    /* Sticky nav with blur */
+    
     .nav-sticky {
       position: sticky;
       top: 0;
@@ -179,7 +179,7 @@
       inherits: false;
     }
 
-    /* Skill / tag chips */
+    
     .chip {
       display: inline-block;
       background: #000000;
@@ -245,7 +245,7 @@
       border-radius: 0.5rem;
     }
 
-    /* Project cards */
+    
     .project-card {
       display: flex;
       flex-direction: column;
@@ -275,7 +275,7 @@
       }
     }
 
-    /* Scroll fades */
+    
     .fade-up {
       opacity: 0;
       transform: translateY(24px);
@@ -286,7 +286,7 @@
       transform: translateY(0);
     }
 
-    /* Section title bars */
+    
     .section-title {
       display: flex;
       align-items: center;
@@ -305,7 +305,7 @@
       border-radius: 0;
     }
 
-    /* Mobile nav toggle */
+    
     .contact-btn {
       background: rgba(14, 14, 14, 0.418);
       border: 2px solid white;
@@ -336,12 +336,12 @@
       }
     }
 
-    /* Contact gradient with dark red hues */
+    
     .contact-gradient {
       background: linear-gradient(135deg, #2a0505 0%, #4A0000 25%, #660000 50%, #8B0000 75%, #4A0000 100%);
     }
 
-    /* Mobile nav toggle */
+    
     @media (max-width: 640px) {
       .nav-links { display: none; }
       .nav-links.open { display: flex; flex-direction: column; gap: 0.5rem; padding: 1rem; border-top: 1px solid #e5e7eb; background: white; }
@@ -710,7 +710,7 @@
         </div>
       </div>
 
-      <!-- Lab courses with expandable sections -->
+      <!-- Lab courses -->
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
         <!-- EECS 215 -->
         <div class="lab-course">
@@ -731,7 +731,7 @@
             <div class="text-sm text-[#FFFFFF] pl-4">Lab 6 - First &amp; Second-Order Circuits</div>
           </div>
         </div>
-
+        <!-- EECS 216 -->
         <div class="lab-course">
           <div class="flex items-center justify-center gap-4 mb-4">
             <h3 class="text-lg font-semibold text-[#F5F5F4] whitespace-nowrap">EECS 216 Contents</h3>
@@ -749,7 +749,7 @@
             <div class="text-sm text-[#FFFFFF] pl-4">Lab 5 - Feedback Control</div>
           </div>
         </div>
-
+        <!-- EECS 312 -->
         <div class="lab-course">
           <div class="flex items-center justify-center gap-4 mb-4">
             <h3 class="text-lg font-semibold text-[#F5F5F4] whitespace-nowrap">EECS 312 Contents</h3>
@@ -824,7 +824,7 @@
     </div>
   </section>
 
-  <!-- ──  CONTACT ── -->
+  <!--  CONTACT -->
   <section id="contact" class="py-10 contact-gradient">
     <div class="max-w-2xl mx-auto px-6 text-center fade-up">
       <h2 class="text-5xl font-extrabold text-[#F5F5F4] mb-10 tracking-tight">Want to Connect?</h2>
@@ -854,13 +854,13 @@
   </section>
 
 
-  <!-- ── FOOTER ── -->
+  <!-- FOOTER -->
   <footer class="py-5 text-center text-xs text-[#F5F5F4] stripes">
     © 2026 Alec de Moraes &nbsp;-&nbsp; Website created with HTML and Tailwind CSS
   </footer>
 
 
-  <!-- Scroll fade-in observer + other scripts -->
+
 
   <script>
     // Toggle lab content visibility
@@ -898,7 +898,6 @@
 
         projects[currentProject].classList.remove('hidden');
 
-        // Make sure scroll fade doesn't leave it transparent
         projects[currentProject].classList.add('visible');
 
       }, 700);
@@ -914,11 +913,10 @@
 
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-    // Smooth scroll with header offset for navigation links
+    // Smooth scroll 
     document.querySelectorAll('a[href^="#"]').forEach(link => {
       link.addEventListener('click', function(e) {
         const href = this.getAttribute('href');
-        // Only apply offset scroll for specific sections
         if (['#education_and_activities', '#experience', '#projects', '#labs'].includes(href)) {
           e.preventDefault();
           const target = document.querySelector(href);
